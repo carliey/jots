@@ -1,6 +1,7 @@
 import { Stack, Tabs, router } from "expo-router";
 import React, { useEffect, useState } from "react";
 import {
+  FlatList,
   SafeAreaView,
   ScrollView,
   Text,
@@ -92,7 +93,7 @@ function Home() {
         }}
       />
       <View>
-        {/* <FlatList
+        <FlatList
           data={notes}
           renderItem={({ item }) => (
             <TouchableOpacity
@@ -124,18 +125,61 @@ function Home() {
                 <Image
                   resizeMode="contain"
                   source={{
-                    uri: item?.images[0]?.url,
+                    uri: item?.images?.[0]?.url,
                   }}
-                  style={{ height: 100, width: 100, objectFit: "cover", borderRadius: 10, backgroundColor: colors.gray }}
+                  style={{
+                    height: 100,
+                    width: 100,
+                    objectFit: "cover",
+                    borderRadius: 10,
+                    backgroundColor: colors.gray,
+                  }}
                 />
               </View>
-              <View style={{ paddingLeft: 15, flexDirection: "row", justifyContent: "space-between", width: "70%" }}>
+              <View
+                style={{
+                  paddingLeft: 15,
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  width: "70%",
+                }}
+              >
                 <View>
-                  <Text style={{ fontSize: 14, fontFamily: "poppinsBold", color: colors.text }}>{item.subject}</Text>
-                  <Text style={{ fontSize: 16, fontFamily: "poppins", color: colors.text }}>{item.topic}</Text>
-                  <Text style={{ fontSize: 15, fontFamily: "poppinsRegular", marginTop: 10, color: colors.text }}>{dayjs(item.created_at).format("D, MMMM YYYY")}</Text>
+                  <Text
+                    style={{
+                      fontSize: 14,
+                      fontFamily: "poppinsBold",
+                      color: colors.text,
+                    }}
+                  >
+                    {item?.subject}
+                  </Text>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontFamily: "poppins",
+                      color: colors.text,
+                    }}
+                  >
+                    {item?.topic}
+                  </Text>
+                  <Text
+                    style={{
+                      fontSize: 15,
+                      fontFamily: "poppinsRegular",
+                      marginTop: 10,
+                      color: colors.text,
+                    }}
+                  >
+                    {dayjs(item?.created_at).format("D, MMMM YYYY")}
+                  </Text>
                 </View>
-                <View style={{ justifyContent: "space-between", alignItems: "flex-end" }}>
+                <View
+                  style={{
+                    justifyContent: "space-between",
+                    alignItems: "flex-end",
+                  }}
+                >
                   <View
                     style={{
                       borderColor: "rgb(62, 214, 37)",
@@ -149,7 +193,11 @@ function Home() {
                       justifyContent: "center",
                     }}
                   >
-                    <Text style={{ fontFamily: "poppinsBold", color: colors.text }}>DONE</Text>
+                    <Text
+                      style={{ fontFamily: "poppinsBold", color: colors.text }}
+                    >
+                      DONE
+                    </Text>
                   </View>
                   <IconContainer
                     size="60%"
@@ -163,7 +211,7 @@ function Home() {
               </View>
             </TouchableOpacity>
           )}
-        /> */}
+        />
       </View>
     </ScrollView>
   );
