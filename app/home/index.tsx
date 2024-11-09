@@ -1,12 +1,19 @@
 import { Stack, Tabs, router } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
+import {
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import IconContainer from "../../components/common/IconContainer/IconContainer";
 import { colors } from "../../constants/theme";
 import { styles } from "../auth/auth.style";
 import { Image } from "react-native";
 import { api } from "../utils/api";
-import { FlatList } from "react-native-gesture-handler";
+// import { FlatList } from "react-native-gesture-handler";
 import dayjs from "dayjs";
 
 function Home() {
@@ -26,11 +33,27 @@ function Home() {
   }, []);
   console.log("hwy", notes?.length);
   return (
-    <ScrollView style={{ backgroundColor: colors.white, paddingHorizontal: 20 }}>
+    <ScrollView
+      style={{ backgroundColor: colors.white, paddingHorizontal: 20 }}
+    >
       <View style={styles.inputWrapper}>
-        <TextInput style={{ ...styles.input, backgroundColor: colors.gray, height: 60, fontSize: 20, fontFamily: "poppinsRegular" }} placeholder="Search Jots" placeholderTextColor={colors.text} />
+        <TextInput
+          style={{
+            ...styles.input,
+            backgroundColor: colors.gray,
+            height: 60,
+            fontSize: 20,
+            fontFamily: "poppinsRegular",
+          }}
+          placeholder="Search Jots"
+          placeholderTextColor={colors.text}
+        />
       </View>
-      <Text style={{ fontSize: 25, fontFamily: "poppinsBold", marginBottom: 20 }}>Your Jots</Text>
+      <Text
+        style={{ fontSize: 25, fontFamily: "poppinsBold", marginBottom: 20 }}
+      >
+        Your Jots
+      </Text>
       <Stack.Screen
         options={{
           headerTitle: "",
@@ -57,14 +80,19 @@ function Home() {
                     router.push("/create");
                   }}
                 />
-                <IconContainer iconUrl={require("../../assets/images/memoji.png")} bg={true} size={"75%"} handlePress={() => {}} />
+                <IconContainer
+                  iconUrl={require("../../assets/images/memoji.png")}
+                  bg={true}
+                  size={"75%"}
+                  handlePress={() => {}}
+                />
               </View>
             );
           },
         }}
       />
       <View>
-        <FlatList
+        {/* <FlatList
           data={notes}
           renderItem={({ item }) => (
             <TouchableOpacity
@@ -135,7 +163,7 @@ function Home() {
               </View>
             </TouchableOpacity>
           )}
-        />
+        /> */}
       </View>
     </ScrollView>
   );
