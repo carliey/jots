@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import FullButton from "../../../components/common/FullBtn/FullButton";
 import { api } from "../../utils/api";
-import { useMutation } from "@tanstack/react-query";
 import { styles } from "../auth.style";
 import { colors } from "../../../constants/theme";
 import { Link, router } from "expo-router";
@@ -19,8 +18,13 @@ const Email = () => {
   };
   const onSubmit = async () => {
     setLoading(true);
+    router.push(`/home/`);
+
     try {
-      const login = await api.post({ endpoint: "login", payload: formik.values });
+      const login = await api.post({
+        endpoint: "login",
+        payload: formik.values,
+      });
       console.log(login);
       if (login?.token) {
         router.push(`/home/`);
@@ -48,7 +52,13 @@ const Email = () => {
 
   return (
     <View style={styles.inputWrapper}>
-      <TextInput style={{ ...styles.input }} onChangeText={formik.handleChange("email")} onBlur={formik.handleBlur("email")} value={formik.values.email} placeholder="Enter your Email" />
+      <TextInput
+        style={{ ...styles.input }}
+        onChangeText={formik.handleChange("email")}
+        onBlur={formik.handleBlur("email")}
+        value={formik.values.email}
+        placeholder="Enter your Email"
+      />
       <TextInput
         style={{ ...styles.input }}
         secureTextEntry
@@ -57,13 +67,31 @@ const Email = () => {
         value={formik.values.password}
         placeholder="Enter Password"
       />
-      <Text style={{ fontSize: 15, fontFamily: "poppins", color: colors.text, marginBottom: 10 }}>
+      <Text
+        style={{
+          fontSize: 15,
+          fontFamily: "poppins",
+          color: colors.text,
+          marginBottom: 10,
+        }}
+      >
         Don't have an accout?{" "}
-        <Link href={"/auth/signup/Email"} style={{ fontSize: 15, fontFamily: "poppinsBold", color: colors.primary }}>
+        <Link
+          href={"/auth/signup/Email"}
+          style={{
+            fontSize: 15,
+            fontFamily: "poppinsBold",
+            color: colors.primary,
+          }}
+        >
           Sign Up
         </Link>
       </Text>
-      <FullButton handlePress={formik.handleSubmit} text={"Sign In"} loading={loading} />
+      <FullButton
+        handlePress={formik.handleSubmit}
+        text={"Sign In"}
+        loading={loading}
+      />
     </View>
   );
 };
